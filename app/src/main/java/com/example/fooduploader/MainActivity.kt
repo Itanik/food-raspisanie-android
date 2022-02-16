@@ -1,8 +1,8 @@
 package com.example.fooduploader
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.fooduploader.databinding.ActivityMainBinding
 import timber.log.Timber
@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         initLogger()
+        viewModel.readCredentials(applicationContext.assets)
     }
 
     private fun initLogger() {
