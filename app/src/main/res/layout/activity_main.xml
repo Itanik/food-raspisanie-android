@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable name="viewModel" type="com.example.fooduploader.MainActivityViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_margin"
             android:text="@string/select_table"
+            app:layout_constraintEnd_toEndOf="@+id/select_menu_btn"
             app:layout_constraintStart_toStartOf="@+id/select_menu_btn"
             app:layout_constraintTop_toBottomOf="@+id/select_menu_btn" />
 
@@ -62,6 +63,7 @@
             android:layout_marginTop="@dimen/large_margin"
             android:gravity="center"
             android:padding="@dimen/large_margin"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
