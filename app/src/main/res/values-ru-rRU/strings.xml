@@ -10,4 +10,5 @@
     <string name="status_uploading">Загружаю файл на сервер</string>
     <string name="status_success">Успех!</string>
     <string name="status_error">Ошибка: %1$s</string>
+    <string name="upload">Загрузить на сайт</string>
 </resources>

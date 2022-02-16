@@ -56,6 +56,18 @@
             app:layout_constraintStart_toStartOf="@+id/select_menu_btn"
             app:layout_constraintTop_toBottomOf="@+id/select_menu_btn" />
 
+
+        <Button
+            android:id="@+id/upload_files_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_margin"
+            android:text="@string/upload"
+            android:backgroundTint="@color/teal_700"
+            app:layout_constraintEnd_toEndOf="@+id/select_table_btn"
+            app:layout_constraintStart_toStartOf="@+id/select_table_btn"
+            app:layout_constraintTop_toBottomOf="@+id/select_table_btn" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/debug_log"
             android:layout_width="0dp"
@@ -67,6 +79,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_table_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/upload_files_btn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

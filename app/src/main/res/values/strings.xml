@@ -11,4 +11,5 @@
     <string name="status_uploading">Uploading file on server</string>
     <string name="status_success">Operation successful</string>
     <string name="status_error">Error: %1$s</string>
+    <string name="upload">Upload</string>
 </resources>
