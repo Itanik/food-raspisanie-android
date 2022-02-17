@@ -1,6 +1,8 @@
 package com.example.fooduploader
 
+import android.content.ContentResolver
 import android.content.res.AssetManager
+import android.net.Uri
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,8 +15,12 @@ import timber.log.Timber
 class MainActivityViewModel : ViewModel() {
     private val logger = ObservableTimberTree()
     private lateinit var credentials: Credentials
+    private val ftp by lazy { FTPManager(credentials) }
 
-    private var _status = MutableLiveData<String?>()
+    var menuUri: Uri? = null
+    var tableUri: Uri? = null
+
+    private var _status = MutableLiveData(R.string.status_disconnected)
     val status get() = _status
     private var _selectMenuBtnName = MutableLiveData<String?>()
     val selectMenuBtnName get() = _selectMenuBtnName
@@ -35,17 +41,35 @@ class MainActivityViewModel : ViewModel() {
             it.readText()
         }
         credentials = Json.decodeFromString(credJson)
+        Timber.i("Credentials successfully read")
     }
 
-    fun selectMenu() {
-        _status.value = "Выбор меню"
+    fun setMenuBtnName(name: String?) {
+        _selectMenuBtnName.value = name
+        Timber.i("Selected file: $name")
+        _status.value = R.string.status_select_menu
     }
 
-    fun selectTable() {
-        _status.value = "Выбор таблицы"
+    fun setTableBtnName(name: String?) {
+        _selectTableBtnName.value = name
+        Timber.i("Selected file: $name")
+        _status.value = R.string.status_select_table
     }
 
-    fun upload() {
-        _status.value = "Загрузка"
+    fun isUploadPermitted() = menuUri != null || tableUri != null
+
+    suspend fun upload(resolver: ContentResolver) {
+        _status.postValue(R.string.status_uploading)
+
+        try {
+            val connectionResult = ftp.connect()
+
+
+        } catch (e: Exception) {
+
+        } finally {
+            ftp.disconnect()
+        }
+
     }
 }
