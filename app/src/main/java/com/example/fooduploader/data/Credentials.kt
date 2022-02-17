@@ -1,4 +1,4 @@
-package com.example.fooduploader
+package com.example.fooduploader.data
 
 import kotlinx.serialization.Serializable
 
