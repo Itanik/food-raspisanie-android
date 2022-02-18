@@ -1,6 +1,7 @@
 package com.example.fooduploader
 
 import com.example.fooduploader.data.Credentials
+import org.apache.commons.net.ftp.FTP
 import org.apache.commons.net.ftp.FTPClient
 import org.apache.commons.net.ftp.FTPClientConfig
 import timber.log.Timber
@@ -25,7 +26,6 @@ class FTPManager(private val credentials: Credentials) {
     }
 
     fun disconnect() {
-        client.logout()
         client.disconnect()
         Timber.d("Disconnected from server")
     }
@@ -33,13 +33,16 @@ class FTPManager(private val credentials: Credentials) {
     fun getTableFilesList(): List<String> =
         client.listFiles(foodPath).map { it.name }.filter { it.endsWith("-sm.xlsx") }
 
-    private fun uploadFile(path: String, file: InputStream): Boolean =
-        client.storeFile(path, file)
+    fun uploadFile(path: String, file: InputStream): Boolean {
+        Timber.i("Starting to upload file on: $path")
+        client.setFileType(FTP.BINARY_FILE_TYPE)
+        return client.storeFile(path, file)
+    }
 
     companion object {
-        private const val foodPath = "/food/"
-        private const val foodJsonFileName = "food_files.json"
-        private const val menuJsonFileName = "menu_file.json"
-        private const val foodImageFileName = "menu."
+        const val foodPath = "/food/"
+        const val foodJsonFileName = "food_files.json"
+        const val menuJsonFileName = "menu_file.json"
+        const val foodImageFileName = "menu."
     }
 }

@@ -2,7 +2,6 @@ package com.example.fooduploader
 
 import android.net.Uri
 import android.os.Bundle
-import android.provider.OpenableColumns
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -64,12 +63,12 @@ class MainActivity : AppCompatActivity() {
     private val getMenuFile =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             viewModel.menuUri = uri
-            viewModel.setMenuBtnName(uri?.extractFileName())
+            viewModel.setMenuBtnName(contentResolver.extractFileName(uri))
         }
 
     private val getTableFile =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            val fileName = uri?.extractFileName()
+            val fileName = contentResolver.extractFileName(uri)
             if (fileName?.endsWith("xlsx") == false) {
                 showDialog(R.string.alert_file_must_be_xlsx, android.R.string.ok)
             } else {
@@ -77,13 +76,4 @@ class MainActivity : AppCompatActivity() {
                 viewModel.setTableBtnName(fileName)
             }
         }
-
-    private fun Uri.extractFileName(): String? {
-        contentResolver.query(this, null, null, null, null)?.use {
-            val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-            it.moveToFirst()
-            return it.getString(nameIndex)
-        }
-        return null
-    }
 }

@@ -7,13 +7,14 @@
     <string name="select_table">Select table</string>
 
     <string name="status_disconnected">Disconnected</string>
-    <string name="status_select_menu">Select menu</string>
-    <string name="status_select_table">Select table</string>
+    <string name="status_selected_menu">Selected menu</string>
+    <string name="status_selected_table">Selected table</string>
+    <string name="status_selected_menu_table">Selected menu and table</string>
     <string name="status_connected">Connected</string>
     <string name="status_connecting">Connecting to FTP server</string>
     <string name="status_uploading">Uploading file on server</string>
     <string name="status_success">Operation successful</string>
-    <string name="status_error">Error: %1$s</string>
+    <string name="status_error">Connection error</string>
     <string name="upload">Upload</string>
 
     <string name="alert_file_not_entered">You should pick at least one file to upload to server</string>

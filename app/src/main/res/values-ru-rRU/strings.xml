@@ -7,13 +7,14 @@
     <string name="select_table">Выбрать таблицу</string>
 
     <string name="status_disconnected">Отключен от сервера</string>
-    <string name="status_select_menu">Выбор меню</string>
-    <string name="status_select_table">Выбор таблицы</string>
+    <string name="status_selected_menu">Выбрано меню</string>
+    <string name="status_selected_table">Выбрана таблица</string>
+    <string name="status_selected_menu_table">Выбрано меню и таблица</string>
     <string name="status_connected">Подключен к серверу</string>
     <string name="status_connecting">Подключаюсь к серверу</string>
     <string name="status_uploading">Загружаю файл на сервер</string>
     <string name="status_success">Успех!</string>
-    <string name="status_error">Ошибка: %1$s</string>
+    <string name="status_error">Ошибка подключения к серверу</string>
     <string name="upload">Загрузить на сайт</string>
 
     <string name="alert_file_not_entered">Вы должны выбрать как минимум один файл для загрузки на сервер</string>
