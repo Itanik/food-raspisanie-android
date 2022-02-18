@@ -15,9 +15,6 @@ class ObservableTimberTree : Timber.Tree() {
 
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         val formattedMessage = dateFormat.format(Calendar.getInstance().time) + " | " + message
-        if (!_logLiveData.hasActiveObservers())
-            _logLiveData.value = _logLiveData.value.plus('\n').plus(message)
-        else
-            _logLiveData.value = formattedMessage
+        _logLiveData.value = formattedMessage
     }
 }

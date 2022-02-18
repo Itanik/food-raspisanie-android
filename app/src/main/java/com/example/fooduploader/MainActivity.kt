@@ -34,23 +34,23 @@ class MainActivity : AppCompatActivity() {
                 getMenuFile.launch("image/*")
             }
             selectTableBtn.setOnClickListener {
-                getTableFile.launch("application/vnd.ms-excel")
+                getTableFile.launch("application/*")
             }
             uploadFilesBtn.setOnClickListener {
-                if (viewModel.isUploadPermitted())
+                if (viewModel!!.isUploadPermitted())
                     lifecycleScope.launch(Dispatchers.IO) {
-                        viewModel.upload(contentResolver)
+                        viewModel!!.upload(contentResolver)
                     }
                 else
-                    showDialog()
+                    showDialog(R.string.alert_file_not_entered, android.R.string.ok)
             }
         }
     }
 
-    private fun showDialog() {
+    private fun showDialog(message: Int, button: Int) {
         AlertDialog.Builder(this@MainActivity).apply {
-            setMessage(R.string.alert_file_not_entered)
-            setPositiveButton(android.R.string.ok) { dialog, which ->
+            setMessage(message)
+            setPositiveButton(button) { dialog, which ->
                 dialog.dismiss()
             }
         }.create().show()
@@ -69,8 +69,13 @@ class MainActivity : AppCompatActivity() {
 
     private val getTableFile =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            viewModel.tableUri = uri
-            viewModel.setTableBtnName(uri?.extractFileName())
+            val fileName = uri?.extractFileName()
+            if (fileName?.endsWith("xlsx") == false) {
+                showDialog(R.string.alert_file_must_be_xlsx, android.R.string.ok)
+            } else {
+                viewModel.tableUri = uri
+                viewModel.setTableBtnName(fileName)
+            }
         }
 
     private fun Uri.extractFileName(): String? {

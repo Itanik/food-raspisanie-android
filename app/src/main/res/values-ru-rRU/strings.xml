@@ -17,4 +17,5 @@
     <string name="upload">Загрузить на сайт</string>
 
     <string name="alert_file_not_entered">Вы должны выбрать как минимум один файл для загрузки на сервер</string>
+    <string name="alert_file_must_be_xlsx">Файл должен быть формата xlsx</string>
 </resources>

@@ -17,4 +17,5 @@
     <string name="upload">Upload</string>
 
     <string name="alert_file_not_entered">You should pick at least one file to upload to server</string>
+    <string name="alert_file_must_be_xlsx">File should have xlsx extension</string>
 </resources>

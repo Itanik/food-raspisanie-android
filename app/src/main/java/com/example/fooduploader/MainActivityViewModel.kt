@@ -46,13 +46,13 @@ class MainActivityViewModel : ViewModel() {
 
     fun setMenuBtnName(name: String?) {
         _selectMenuBtnName.value = name
-        Timber.i("Selected file: $name")
+        Timber.i("Selected menu file: $name")
         _status.value = R.string.status_select_menu
     }
 
     fun setTableBtnName(name: String?) {
         _selectTableBtnName.value = name
-        Timber.i("Selected file: $name")
+        Timber.i("Selected table file: $name")
         _status.value = R.string.status_select_table
     }
 
