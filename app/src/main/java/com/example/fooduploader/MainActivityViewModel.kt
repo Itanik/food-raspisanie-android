@@ -35,6 +35,8 @@ class MainActivityViewModel : ViewModel() {
     val selectMenuBtnName get() = _selectMenuBtnName
     private var _selectTableBtnName = MutableLiveData<String?>()
     val selectTableBtnName get() = _selectTableBtnName
+    private var _buttonsEnabled = MutableLiveData(true)
+    val buttonsEnabled get() = _buttonsEnabled
 
     fun initLogger(lifecycleOwner: LifecycleOwner, debugLog: RecyclerView) {
         Timber.plant(logger)
@@ -85,6 +87,7 @@ class MainActivityViewModel : ViewModel() {
     fun isUploadPermitted() = menuUri != null || tableUri != null
 
     suspend fun upload(resolver: ContentResolver) {
+        _buttonsEnabled.postValue(false)
         _status.postValue(R.string.status_uploading)
 
         try {
@@ -108,6 +111,7 @@ class MainActivityViewModel : ViewModel() {
             _status.postValue(R.string.status_error)
         } finally {
             ftp.disconnect()
+            _buttonsEnabled.postValue(true)
         }
 
     }

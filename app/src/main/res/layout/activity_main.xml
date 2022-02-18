@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="viewModel" type="com.example.fooduploader.MainActivityViewModel"/>
+
+        <variable
+            name="viewModel"
+            type="com.example.fooduploader.MainActivityViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_margin"
+            android:enabled="@{viewModel.buttonsEnabled}"
             android:text="@{viewModel.selectMenuBtnName == null ? @string/select_menu : viewModel.selectMenuBtnName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_margin"
+            android:enabled="@{viewModel.buttonsEnabled}"
             android:text="@{viewModel.selectTableBtnName == null ? @string/select_table : viewModel.selectTableBtnName}"
             app:layout_constraintEnd_toEndOf="@+id/select_menu_btn"
             app:layout_constraintStart_toStartOf="@+id/select_menu_btn"
@@ -62,8 +67,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/large_margin"
-            android:text="@string/upload"
             android:backgroundTint="@color/teal_700"
+            android:enabled="@{viewModel.buttonsEnabled}"
+            android:text="@string/upload"
             app:layout_constraintEnd_toEndOf="@+id/select_table_btn"
             app:layout_constraintStart_toStartOf="@+id/select_table_btn"
             app:layout_constraintTop_toBottomOf="@+id/select_table_btn" />
