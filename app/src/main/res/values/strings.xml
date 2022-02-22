@@ -19,4 +19,5 @@
 
     <string name="alert_file_not_entered">You should pick at least one file to upload to server</string>
     <string name="alert_file_must_be_xlsx">File should have xlsx extension</string>
+    <string name="fa_web_icon" translatable="false">&#xf0ac;</string>
 </resources>
