@@ -1,8 +1,10 @@
 package com.example.fooduploader
 
 import android.content.ContentResolver
+import android.content.Context
 import android.content.res.AssetManager
 import android.net.Uri
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,6 +22,10 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.apache.commons.net.ftp.FTPReply
 import timber.log.Timber
+
+enum class ButtonMode {
+    MENU, TABLE
+}
 
 class MainActivityViewModel : ViewModel() {
     private val logger = ObservableTimberTree(viewModelScope)
@@ -86,7 +92,7 @@ class MainActivityViewModel : ViewModel() {
 
     fun isUploadPermitted() = menuUri != null || tableUri != null
 
-    suspend fun upload(resolver: ContentResolver) {
+    fun upload(resolver: ContentResolver) {
         _buttonsEnabled.postValue(false)
         _status.postValue(R.string.status_uploading)
 
@@ -174,6 +180,14 @@ class MainActivityViewModel : ViewModel() {
                 Timber.e("Failure! $newName does not uploaded")
         }
         return newPath
+    }
+
+    fun openInBrowser(context: Context, mode: ButtonMode) {
+        val url = when (mode) {
+            ButtonMode.MENU -> credentials.menuPage
+            ButtonMode.TABLE -> credentials.tablePage
+        }
+        CustomTabsIntent.Builder().build().launchUrl(context, Uri.parse(url))
     }
 
     private val String.extension: String get() = this.split('.').last()

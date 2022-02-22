@@ -43,6 +43,18 @@ class MainActivity : AppCompatActivity() {
                 else
                     showDialog(R.string.alert_file_not_entered, android.R.string.ok)
             }
+            checkMenuBtn.setOnClickListener {
+                viewModel!!.openInBrowser(
+                    this@MainActivity,
+                    ButtonMode.MENU
+                )
+            }
+            checkTableBtn.setOnClickListener {
+                viewModel!!.openInBrowser(
+                    this@MainActivity,
+                    ButtonMode.TABLE
+                )
+            }
         }
     }
 

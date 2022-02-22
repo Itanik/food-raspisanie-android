@@ -4,7 +4,7 @@
 
     <string name="connection_status">Статус:</string>
     <string name="select_menu">Выбрать меню</string>
-    <string name="select_table">Выбрать таблицу</string>
+    <string name="select_table">Выбрать xlsx</string>
 
     <string name="status_disconnected">Отключен от сервера</string>
     <string name="status_selected_menu">Выбрано меню</string>
