@@ -37,24 +37,29 @@
             app:layout_constraintBottom_toBottomOf="@+id/status_headline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/status_headline"
-            app:layout_constraintTop_toTopOf="@+id/status_headline" />
+            app:layout_constraintTop_toTopOf="@+id/status_headline"
+            tools:text="@string/status_disconnected" />
 
         <Button
             android:id="@+id/select_menu_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_margin"
             android:layout_marginTop="@dimen/large_margin"
             android:enabled="@{viewModel.buttonsEnabled}"
             android:text="@{viewModel.selectMenuBtnName == null ? @string/select_menu : viewModel.selectMenuBtnName}"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/check_menu_btn"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/status_headline" />
+            app:layout_constraintTop_toBottomOf="@+id/status_headline"
+            tools:text="@string/select_menu" />
 
         <Button
             android:id="@+id/check_menu_btn"
             style="@style/Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/large_margin"
             android:enabled="@{viewModel.buttonsEnabled}"
             android:text="@string/fa_web_icon"
             app:layout_constraintBottom_toBottomOf="@+id/select_menu_btn"
@@ -66,23 +71,27 @@
             android:id="@+id/select_table_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/large_margin"
             android:layout_marginTop="@dimen/large_margin"
             android:enabled="@{viewModel.buttonsEnabled}"
             android:text="@{viewModel.selectTableBtnName == null ? @string/select_table : viewModel.selectTableBtnName}"
-            app:layout_constraintEnd_toEndOf="@+id/select_menu_btn"
-            app:layout_constraintStart_toStartOf="@+id/select_menu_btn"
-            app:layout_constraintTop_toBottomOf="@+id/select_menu_btn" />
+            app:layout_constraintEnd_toStartOf="@+id/check_table_btn"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/select_menu_btn"
+            tools:text="@string/select_table" />
 
         <Button
             android:id="@+id/check_table_btn"
             style="@style/Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/large_margin"
             android:enabled="@{viewModel.buttonsEnabled}"
             android:text="@string/fa_web_icon"
             app:layout_constraintBottom_toBottomOf="@+id/select_table_btn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/select_menu_btn"
+            app:layout_constraintStart_toEndOf="@+id/select_table_btn"
             app:layout_constraintTop_toTopOf="@+id/select_table_btn" />
 
         <Button
@@ -93,8 +102,8 @@
             android:backgroundTint="@color/teal_700"
             android:enabled="@{viewModel.buttonsEnabled}"
             android:text="@string/upload"
-            app:layout_constraintEnd_toEndOf="@+id/select_table_btn"
-            app:layout_constraintStart_toStartOf="@+id/select_table_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/select_table_btn" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -103,7 +112,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/large_margin"
             android:gravity="center"
-            android:padding="@dimen/large_margin"
+            android:padding="@dimen/default_margin"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
