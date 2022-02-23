@@ -21,7 +21,9 @@ private val diffCallBack = object : DiffUtil.ItemCallback<String>() {
 class LogListAdapter : ListAdapter<String, LogViewHolder>(diffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LogViewHolder {
-        return LogViewHolder(LayoutInflater.from(parent.context).inflate(android.R.layout.simple_list_item_1, parent, false))
+        return LogViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_log, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: LogViewHolder, position: Int) {
@@ -30,5 +32,5 @@ class LogListAdapter : ListAdapter<String, LogViewHolder>(diffCallBack) {
 }
 
 class LogViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    var textField: TextView = view.findViewById(android.R.id.text1) as TextView
+    var textField: TextView = view.findViewById(R.id.log_text) as TextView
 }
