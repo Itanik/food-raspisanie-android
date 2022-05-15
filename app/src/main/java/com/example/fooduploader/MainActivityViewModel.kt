@@ -5,11 +5,8 @@ import android.content.Context
 import android.content.res.AssetManager
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.recyclerview.widget.RecyclerView
 import com.example.fooduploader.FTPManager.Companion.foodImageFileName
 import com.example.fooduploader.FTPManager.Companion.foodJsonFileName
 import com.example.fooduploader.FTPManager.Companion.foodPath
@@ -28,7 +25,6 @@ enum class ButtonMode {
 }
 
 class MainActivityViewModel : ViewModel() {
-    private val logger = ObservableTimberTree(viewModelScope)
     private lateinit var credentials: Credentials
     private val ftp by lazy { FTPManager(credentials) }
 
@@ -43,15 +39,6 @@ class MainActivityViewModel : ViewModel() {
     val selectTableBtnName get() = _selectTableBtnName
     private var _buttonsEnabled = MutableLiveData(true)
     val buttonsEnabled get() = _buttonsEnabled
-
-    fun initLogger(lifecycleOwner: LifecycleOwner, debugLog: RecyclerView) {
-        Timber.plant(logger)
-        val logAdapter = LogListAdapter()
-        debugLog.adapter = logAdapter
-        logger.logLiveData.observe(lifecycleOwner) {
-            logAdapter.submitList(logAdapter.currentList.plus(it))
-        }
-    }
 
     fun readCredentials(assets: AssetManager) {
         val credJson = assets.open("credentials.json").bufferedReader().use {

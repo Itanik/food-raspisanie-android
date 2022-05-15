@@ -7,15 +7,19 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.fooduploader.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainActivityViewModel by viewModels()
+    private val logger = ObservableTimberTree(lifecycleScope)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +72,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initLogger() {
-        viewModel.initLogger(this, binding.debugLog)
+        Timber.plant(logger)
+        val logListAdapter = LogListAdapter()
+        binding.debugLog.adapter = logListAdapter
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                logger.logFlow.collect {
+                    logListAdapter.submitList(logListAdapter.currentList.plus(it))
+                }
+            }
+        }
         Timber.d("Logger initialized")
     }
 
